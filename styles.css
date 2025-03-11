@@ -6,18 +6,18 @@ body {
 }
 
 h2 {
-    color: #333; /* Darker color for the title */
+    color: #fa2626; /* Darker color for the title */
     text-align: center; /* Center the title */
     margin-bottom: 20px; /* Space below the title */
 }
 
 #taskContainer {
     margin: 0 auto; /* Center the container */
-    border: 1px solid #ff1414;
+    border: 1px solid #ffffff;
     padding: 20px; /* Increased padding */
     width: 90%; /* Responsive width */
     max-width: 400px; /* Max width for larger screens */
-    background-color: #3d1a1a; /* White background for the task container */
+    background-color: #f0cdcd; /* White background for the task container */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }

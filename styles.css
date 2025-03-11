@@ -1,0 +1,22 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+label {
+    margin-right : 10px
+}
+#taskContainer{
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 300px;
+}
+
+.taskItem {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+}
+    
+.taskItem button {
+        padding: 3px 7px;
+}

@@ -22,8 +22,18 @@ function addTodo() {
 
 function saveTask(task) {
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    tasks.push(task);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    let taskContainer = document.getElementById("taskContainer");
+    taskContainer.innerHTML = "";
+
+    let taskList = document.createElement("ul")
+
+    tasks.forEach(task => {
+        let taskElement = createTaskElement(task);
+        taskList.appendChild(taskElement);
+    });
+
+    taskContainer.appendChild(taskElement);
+
 }
 function loadTasks() {
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -36,15 +46,28 @@ function loadTasks() {
 }
 
 function createTaskElement(taskText) {
-    let taskElement = document.createElement("p");
+    let taskElement = document.createElement("li");
+    let taskSpan = document.createElement("span");
+
+    taskSpan.textContent = taskText;
     taskElement.textContent = taskText;
-    taskElement.addEventListener("click",function(){
+    taskSpan.addEventListener("click",function(){
         let newText = prompt("Edit task:",taskElement.textContent)
         if (newText && newText.trim() !=="") {
-            taskElement.textContent = newText;
+            taskSpan.textContent = newText;
             updateTasksInStorage(taskText, newText);
         }
     });
+
+    let deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", function() {
+        taskElement.remove();
+        deleteTaskFromStorage(taskText);
+    });
+
+    taskElement.appendChild(taskSpan);
+    taskElement.appendChild(deleteButton);
     return taskElement;
 }
 function updateTasksInStorage(oldTask, newTask) {
@@ -55,4 +78,10 @@ function updateTasksInStorage(oldTask, newTask) {
         tasks[index] = newTask;
         localStorage.setItem("tasks", JSON.stringify(tasks));
     }
+}
+
+function deleteTaskFromStorage(task) {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    let updateTasks = tasks.filter(task => task!==taskText);
+    localStorage.setItem("tasks", JSON.stringify(updateTasks));
 }

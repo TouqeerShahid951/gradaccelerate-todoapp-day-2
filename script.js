@@ -36,3 +36,13 @@ function loadTasks() {
         taskContainer.appendChild(taskElement);
     });
 }
+
+function updateTasksInStorage(oldTask, newTask) {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    let index = tasks.indexOf(oldTask);
+
+    if (index > -1) {
+        tasks[index] = newTask;
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+}

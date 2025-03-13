@@ -13,8 +13,7 @@ function addTodo() {
     }
 
     let taskContainer = document.getElementById("taskContainer");
-    let taskElement = document.createElement("p");
-    taskElement.textContent = taskText;
+    let taskElement = createTaskElement(taskText);
 
     taskContainer.appendChild(taskElement);
     saveTask(taskText);
@@ -31,12 +30,23 @@ function loadTasks() {
     let taskContainer = document.getElementById("taskContainer");
 
     tasks.forEach(task => {
-        let taskElement = document.createElement("p");
-        taskElement.textContent = task;
+        let taskElement = createTaskElement(task);
         taskContainer.appendChild(taskElement);
     });
 }
 
+function createTaskElement(taskText) {
+    let taskElement = document.createElement("p");
+    taskElement.textContent = taskText;
+    taskElement.addEventListener("click",function(){
+        let newText = prompt("Edit task:",taskElement.textContent)
+        if (newText && newText.trim() !=="") {
+            taskElement.textContent = newText;
+            updateTasksInStorage(taskText, newText);
+        }
+    });
+    return taskElement;
+}
 function updateTasksInStorage(oldTask, newTask) {
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     let index = tasks.indexOf(oldTask);
